@@ -58,5 +58,23 @@ def add_transaction():
 def edit_transation():
     return 0
 
+@app.route("/delete", methods=["DELETE"])
 def delete_transaction():
-    return 0
+    try:
+        data = request.get_json()
+        
+        tid = data['transaction_id']
+
+        conn = sqlite3.connect('database.db')
+        cur = conn.cursor()
+        
+        cur.execute('DELETE FROM transactions WHERE id = ?', (tid,))
+
+        conn.commit()
+        
+        conn.close()
+        
+        return jsonify({'message': 'Transaction deleted!'}), 201
+    
+    except Exception as e:
+        return jsonify({'error': 'str(e)'}), 500
