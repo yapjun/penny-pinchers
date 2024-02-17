@@ -3,14 +3,14 @@
 {% block head %}
   {{ super() }}
   <link rel="stylesheet" href="{{ url_for('static', filename='calender.css') }}">
+  <script src="{{ url_for('static', filename='calender.js') }}" defer></script>
 {% endblock %}
 
 {% block content %}
-  <h1>Index</h1>
-  <div class = "calender-container">
-    <div class="calender">
-      <div class="calender-header">
-        <span class="month-picker" id="month-picker"> February </span>
+  <div class="contianer">
+    <div class="calendar">
+      <div class="calendar-header">
+        <span class="month-picker" id="month-picker"> May </span>
         <div class="year-picker" id="year-picker">
           <span class="year-change" id="pre-year">
             <pre><</pre>
@@ -21,6 +21,7 @@
           </span>
         </div>
       </div>
+
       <div class="calendar-body">
         <div class="calendar-week-days">
           <div>Sun</div>
@@ -46,8 +47,4 @@
       <div class="month-list"></div>
     </div>
   </div>
-{% endblock %}
-
-{% block javascript %}
-<script src="{{ url_for('static', filename='calender.js') }}" defer></script>
 {% endblock %}
