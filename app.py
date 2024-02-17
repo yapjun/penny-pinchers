@@ -42,11 +42,14 @@ def index():
     conn = get_db_connection()
     users = conn.execute("SELECT * FROM user").fetchall()
     conn.close()
-    # return render_template('index.html', users=users)
+    return render_template('profile.html', users=users)
 
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
     return conn
+
+if __name__ == "__main__":
+    app.run()
 
