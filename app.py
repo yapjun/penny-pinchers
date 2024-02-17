@@ -1,5 +1,4 @@
-import time
-from flask import Flask
+import time, datetime, timedelta
 import sqlite3
 import os
 from flask import Flask, render_template, request, url_for, redirect, jsonify
@@ -57,6 +56,44 @@ def add_transaction():
 
 def edit_transation():
     return 0
+
+@app.route("/post", methods=["GET"])
+def get_current_week_data():
+    # Connect to the database
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    # Calculate the start and end dates of the current week
+    today = datetime.now()
+    start_of_week = today - timedelta(days=today.weekday())
+    end_of_week = start_of_week + timedelta(days=6)
+
+    # Fetch data for the current week
+    query = "SELECT * FROM transactions WHERE transaction_date BETWEEN ? AND ?"
+    cursor.execute(query, (start_of_week, end_of_week))
+    current_week_data = cursor.fetchall()
+
+    # Close the connection
+    conn.close()
+
+    return current_week_data
+
+def get_current_month_data():
+    # Connect to the database
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    # Fetch data for the current month
+    current_month = datetime.now().month
+    current_year = datetime.now().year
+    query = "SELECT * FROM transactions WHERE strftime('%m', transaction_date) = ? AND strftime('%Y', transaction_date) = ?"
+    cursor.execute(query, (str(current_month).zfill(2), str(current_year)))
+    current_month_data = cursor.fetchall()
+
+    # Close the connection
+    conn.close()
+
+    return current_month_data
 
 @app.route("/delete", methods=["DELETE"])
 def delete_transaction():
