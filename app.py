@@ -29,7 +29,7 @@ def add_transaction():
         
         name = data['name']
         amount = data['amount']
-        date = data['date']
+        date = data['date'] # 'YYYY-MM-DD'
         necessity_index = data['necessity']
         category = data['category']
         
