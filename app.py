@@ -2,7 +2,7 @@ import time
 from flask import Flask
 import sqlite3
 import os
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, jsonify
 
 app = Flask(__name__)
 
@@ -24,9 +24,31 @@ if __name__ == "__main__":
 
 
 @app.route("/add", methods=['POST'])
-def add_transaction(name, amount, date, necessity_index, category):
-    conn = sqlite3.connect('database.db')
-    cur = conn.cursor()
+def add_transaction():
+    try:
+        data = request.get_json()
+        
+        name = data['name']
+        amount = data['amount']
+        date = data['date']
+        necessity_index = data['necessity']
+        category = data['category']
+        
+        conn = sqlite3.connect('database.db')
+        cur = conn.cursor()
+        
+        sql = '''INSERT INTO transactions (name, amount, date, necessity_index, category) 
+                VALUES (?, ?, ?, ?, ?)'''
+        
+        cur.execute(sql, (name, amount, date, necessity_index, category))
+        conn.commit()
+        
+        conn.close()
+        
+        return jsonify({'message': 'Transaction added!'}), 201
+    
+    except Exception as e:
+        return jsonify({'error': 'str(e)'}), 500
     # data = request
 
     # with conn:
