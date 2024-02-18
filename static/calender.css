@@ -17,7 +17,6 @@
 
   .calendar-container {
     float: right;
-    padding-right: 5%;
     padding-top: 2.5%;
   }
   
@@ -28,6 +27,7 @@
     border-radius: 25px;
     overflow: hidden;
     padding: 35px 50px 0px 50px;
+    margin: 0 auto;
   }
   
   .calendar {
@@ -312,14 +312,12 @@
     }
   }
 
-  .tip-container {
-    float: right;
-  }
   .tip-box{
     padding-left: 10%;
     width: 36vw;
     padding-top: 3%;
     height: 30vh;
+    justify-content: center;
   }
 
   .dragon{
