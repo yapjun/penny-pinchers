@@ -1,2 +1,122 @@
 {% extends "base.html" %}
-{% block title %}Pots{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+{% block title %}Pots page{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='pots.css') }}">
+<script src="{{ url_for('static', filename='pots.js') }}" defer></script>
+{% endblock %}
+
+
+<body>
+    {% block content %}
+    <div class="container">
+        <h1>Pots Financing</h1>
+        <div id="initialPots">
+            <div class="pot" id="savingsPot">
+                <h2>Savings Pot</h2>
+                <p>Current balance: <span id="savingsBalance">0</span></p>
+                <p>Goal amount: <span id="savingsGoal">0</span></p>
+                <button onclick="deposit('savings')">Deposit</button>
+                <button onclick="withdraw('savings')">Withdraw</button>
+            </div>
+
+
+            <div class="pot" id="holidaysPot">
+                <h2>Holidays Pot</h2>
+                <p>Current balance: <span id="holidaysBalance">0</span></p>
+                <p>Goal amount: <span id="holidaysGoal">0</span></p>
+                <button onclick="deposit('holidays')">Deposit</button>
+                <button onclick="withdraw('holidays')">Withdraw</button>
+            </div>
+
+
+            <div class="pot" id="groceriesPot">
+                <h2>Groceries Pot</h2>
+                <p>Current balance: <span id="groceriesBalance">0</span></p>
+                <p>Goal amount: <span id="groceriesGoal">0</span></p>
+                <button onclick="deposit('groceries')">Deposit</button>
+                <button onclick="withdraw('groceries')">Withdraw</button>
+            </div>
+        </div>
+        <button onclick="addNewPot()">Add New Pot</button>
+    </div>
+
+
+    <div id="popup" style="display: none;">
+        <h2>Add New Pot</h2>
+        <label for="potName">Pot Name:</label>
+        <input type="text" id="potName"><br>
+        <label for="amountGoal">Amount Goal:</label>
+        <input type="number" id="amountGoal"><br>
+        <button onclick="createPot()">Create</button>
+    </div>
+    {% endblock %}
+
+
+    <script>
+        let pots = {
+            savings: { balance: 0, goal: 0 },
+            holidays: { balance: 0, goal: 0 },
+            groceries: { balance: 0, goal: 0 }
+        };
+
+
+        function deposit(pot) {
+            let amount = parseInt(prompt("Enter amount to deposit:"));
+            if (!isNaN(amount) && amount > 0) {
+                pots[pot].balance += amount;
+                updateBalance(pot);
+            }
+        }
+
+
+        function withdraw(pot) {
+            let amount = parseInt(prompt("Enter amount to withdraw:"));
+            if (!isNaN(amount) && amount > 0 && amount <= pots[pot].balance) {
+                pots[pot].balance -= amount;
+                updateBalance(pot);
+            } else {
+                alert("Invalid amount or insufficient balance!");
+            }
+        }
+
+
+        function updateBalance(pot) {
+            document.getElementById(pot + "Balance").innerText = pots[pot].balance;
+        }
+
+
+        function addNewPot() {
+            document.getElementById("popup").style.display = "block";
+        }
+
+
+        function createPot() {
+            let potName = document.getElementById("potName").value.trim();
+            let amountGoal = parseInt(document.getElementById("amountGoal").value);
+            if (potName && amountGoal > 0 && !document.getElementById(potName.toLowerCase() + "Pot")) {
+                pots[potName.toLowerCase()] = { balance: 0, goal: amountGoal };
+                let newPotHTML = `
+                <div class="pot" id="${potName.toLowerCase()}Pot">
+                    <h2>${potName} Pot</h2>
+                    <p>Current balance: <span id="${potName.toLowerCase()}Balance">0</span></p>
+                    <p>Goal amount: <span id="${potName.toLowerCase()}Goal">${amountGoal}</span></p>
+                    <button onclick="deposit('${potName.toLowerCase()}')">Deposit</button>
+                    <button onclick="withdraw('${potName.toLowerCase()}')">Withdraw</button>
+                </div>`;
+                document.getElementById("initialPots").insertAdjacentHTML('beforeend', newPotHTML);
+                document.getElementById("popup").style.display = "none";
+            } else if (document.getElementById(potName.toLowerCase() + "Pot")) {
+                alert("Pot name already exists!");
+            } else {
+                alert("Please enter valid pot name and amount goal!");
+            }
+        }
+    </script>
+</body>
+
+</html>
