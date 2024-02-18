@@ -9,11 +9,16 @@
     display: flex;
     height: 100vh;
     width: 100%;
-    justify-content: center;
     align-items: center;
     place-items: center;
-    background: linear-gradient(to right, #9796f0, #42445A);
+    background: white;
     overflow: hidden;
+  }
+
+  .calendar-container {
+    float: right;
+    padding-right: 5%;
+    padding-top: 2.5%;
   }
   
   .calendar {
@@ -30,7 +35,7 @@
   }
   
   .calendar-header {
-    background: #8089FE;
+    background: #71a6df;
     display: flex;
     justify-content: space-between;
     border-radius: 7px;
@@ -106,7 +111,7 @@
   }
   
   .year-change:hover {
-    background-color: #9796f0;
+    background-color: #71a6df;
     transition: all .2s ease-in-out;
     transform: scale(1.12);
   }
@@ -137,7 +142,7 @@
   
   .calendar-days div.current-date {
     color: #f8fbff;
-    background-color: #9796f0;
+    background-color: #71a6df;
     border-radius: 20%;
   }
   
