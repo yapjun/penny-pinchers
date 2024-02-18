@@ -2,11 +2,31 @@
 {% block title %}Settings{% endblock %}
 
 {% block content %}
+
+<!doctype html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='tracker.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='pennypincher.svg') }}">
+
+    <title>Monthly</title>
+</head>
+
 <h1>Settings</h1>
-<h2>Coming soon... 😉</h2>
+<h2>Under construction 😉</h2>
 
 <div class="gif-container">
     <img src="{{ url_for('static', filename='toothlessdancingtoot.gif') }}" alt="Animated GIF">
 </div>
+
+</html>
 
 {% endblock %}
