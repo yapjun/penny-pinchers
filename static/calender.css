@@ -325,11 +325,24 @@
     height: 90%;
   }
 
-  .tip-text{
-    margin-top: 20%;
-    padding-left: 10%;
-    width: 80%;
-    min-height: 5vh;
-    max-height: 5vh;
-    display: inline-block;
+  .img_container {
+    position: relative;
+    right:20%;
+    top:8%;
+    width:60%;
+  }
+  .img_container img {
+    width: 100%;
+    height: auto;
+    padding-left: 15%;
+  }
+
+  .tip-text {
+    text-shadow: 1px 1px 1px white;
+    position: absolute;
+    top: 47%;
+    left:  55%;
+    font-family: 'Open Sans', 'Calibri', sans-serif;
+    -webkit-transform: translate(-50%, -50%); /* iOS */
+    transform: translate(-50%, -50%);
   }
