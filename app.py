@@ -116,7 +116,7 @@ def add_transaction():
         
         # conn.close()
         
-        return redirect(url_for('tracker'))
+        return redirect(url_for('profile'))
     
     except Exception as e:
         return jsonify({'error': 'str(e)'}), 500
@@ -206,7 +206,7 @@ def delete_transaction():
         conn.commit()
         conn.close()
         
-        return redirect(url_for('tracker'))
+        return redirect(url_for('profile'))
     
 if __name__ == "__main__":
     app.run(debug=True)
