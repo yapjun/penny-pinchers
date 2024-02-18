@@ -39,7 +39,7 @@ def profile():
     return render_template('profile.html', tip=random_tip)
 
 @app.route("/tracker")
-def tracker():
+def tracker(): 
     # Connect to the database
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()

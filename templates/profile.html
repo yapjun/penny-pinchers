@@ -4,7 +4,11 @@
   {{ super() }}
   <link rel="stylesheet" href="{{ url_for('static', filename='calender.css') }}">
   <script src="{{ url_for('static', filename='calender.js') }}" defer></script>
+
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'  type='text/css'>
+
 {% endblock %}
+
 
 {% block content %}
   <div class="calendar-container">
@@ -46,9 +50,15 @@
       </div>
       <div class="month-list"></div>
     </div>
-    <p class="tip-text">{{ tip }}</p>
     <div class="tip-box">
-        <img class = "dragon" src = "{{ url_for('static', filename='pennypincher.svg') }}" alt="My Happy SVG"/>
+
+      <div class="img_container">
+        <img class="cover-image" src="{{ url_for('static', filename='speech_bubble.png') }}" alt="omg" />
+        <h4 class="tip-text">{{tip}}</h4>
+      </div>
+
+      <img class = "dragon" src = "{{ url_for('static', filename='pennypincher.svg') }}" alt="My Happy SVG"/>
+    
     </div>
   </div>  
 {% endblock %}
