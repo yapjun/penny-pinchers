@@ -326,10 +326,10 @@
   }
 
   .tip-text{
-    padding-top: 30%;
+    margin-top: 20%;
     padding-left: 10%;
-    width: 40%;
-    min-height: 8vh;
-    max-height: 8vh;
+    width: 100%;
+    min-height: 5vh;
+    max-height: 5vh;
     display: inline-block;
   }
