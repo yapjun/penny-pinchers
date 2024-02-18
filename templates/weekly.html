@@ -23,6 +23,60 @@
 <body>
     <h1>Weekly</h1>
     <hr>
+
+    <div class="container">
+        <div class="row"></div>
+        <div class="row">
+            <div class="col-sm">
+                <div class="card mb-3">
+                    <img class="card-img-top" src="{{ url_for('static', filename='linegraph2.png') }}" alt="barchart">
+                    <div class="card-body"></div>
+                  </div>
+            </div>
+            <div class="col-sm">
+                <div class="card mb-3">
+                    <img class="card-img-top" src="{{ url_for('static', filename='barchart2.png') }}" alt="linegraph">
+                    <div class="card-body"></div>
+                  </div>
+            </div>
+            <div class="col-sm">
+                <div class="card mb-3">
+                    <img class="card-img-top" src="{{ url_for('static', filename='piechart2.png') }}" alt="piechart" width="auto" height="275">
+                    <div class="card-body"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            Total spend on FOOD: £25.07
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            Total spend on TRAVEL: £7.39
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            Total spend on NON-ESSENTIALS: £12.56
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row"></div>
+    </div>
+
 </body>
 
 </html>
