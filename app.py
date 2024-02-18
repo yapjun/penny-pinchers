@@ -1,25 +1,37 @@
-import time, datetime, timedelta
+import time, datetime
+from datetime import timedelta
 import sqlite3
 import os
 from flask import Flask, render_template, request, url_for, redirect, jsonify
+import random
 
 app = Flask(__name__)
 
+tips = [
+    "Pause, reflect, and resist the urge to splurge!",
+    "Quality over quantity!",
+    "Are you sure you need this?... 🤕",
+    "Make every purchase count!",
+    "Focus on your essential expenses first!",
+    "Use our pots to plan out your spendings!",
+    "Have you tried the 50/30/20 rule?",
+    "Stick to your budget!!",
+    "Small splurges add up, think twice before getting that latte!",
+    "Shop smart, not hard!",
+    "Budgeting is sexy 😏",
+    "Cut the subscription creep, cancel unused services!",
+    "Budgeting is sexy 😏",
+    "Needs vs wants. Prioritize your spendings!"
+    "Budgeting is sexy 😏",
+]
 
 @app.route("/")
 def index():
     # conn = get_db_connection()
     # users = conn.execute("SELECT * FROM user").fetchall()
     # conn.close()
-    return render_template('profile.html')
-
-# def get_db_connection():
-#     conn = sqlite3.connect('database.db')
-#     conn.row_factory = sqlite3.Row
-#     return conn
-
-if __name__ == "__main__":
-    app.run()
+    random_tip = random.choice(tips)
+    return render_template('profile.html', tip=random_tip)
 
 
 @app.route("/add", methods=['POST'])
@@ -105,7 +117,7 @@ def delete_transaction():
         conn = sqlite3.connect('database.db')
         cur = conn.cursor()
         
-        cur.execute('DELETE FROM transactions WHERE id = ?', (tid,))
+        cur.execute('DELETE FROM transactions WHERE id = ?', (tid))
 
         conn.commit()
         
@@ -115,3 +127,6 @@ def delete_transaction():
     
     except Exception as e:
         return jsonify({'error': 'str(e)'}), 500
+
+if __name__ == "__main__":
+    app.run(debug=True)
