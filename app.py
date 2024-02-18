@@ -1,10 +1,29 @@
-import time, datetime, timedelta
+import time, datetime
+from datetime import timedelta
 import sqlite3
 import os
 from flask import Flask, render_template, request, url_for, redirect, jsonify
+import random
 
 app = Flask(__name__)
 
+tips = [
+    "Pause, reflect, and resist the urge to splurge!",
+    "Quality over quantity!",
+    "Are you sure you need this?... 🤕",
+    "Make every purchase count!",
+    "Focus on your essential expenses first!",
+    "Use our pots to plan out your spendings!",
+    "Have you tried the 50/30/20 rule?",
+    "Stick to your budget!!",
+    "Small splurges add up, think twice before getting that latte!",
+    "Shop smart, not hard!",
+    "Budgeting is sexy 😏",
+    "Cut the subscription creep, cancel unused services!",
+    "Budgeting is sexy 😏",
+    "Needs vs wants. Prioritize your spendings!"
+    "Budgeting is sexy 😏",
+]
 
 @app.route("/")
 def index():
@@ -20,16 +39,18 @@ def tracker():
 @app.route('/pots')
 def pots():
     return render_template('pots.html')
+    random_tip = random.choice(tips)
+    return render_template('profile.html', tip=random_tip)
 
-@app.route('/monthly.html')
+@app.route('/monthly')
 def monthly():
     return render_template('monthly.html')
 
-@app.route('/weekly.html')
+@app.route('/weekly')
 def weekly():
     return render_template('weekly.html')
 
-@app.route('/settings.html')
+@app.route('/settings')
 def settings():
     return render_template('settings.html')
 

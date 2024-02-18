@@ -13,10 +13,10 @@ CREATE TABLE transactions (
     transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER, 
     transaction_name TEXT NOT NULL,
+    amount DOUBLE NOT NULL DEFAULT 0,
     transaction_date DATE NOT NULL,
     transaction_category TEXT NOT NULL,
     necessity_index BOOLEAN NOT NULL DEFAULT 0,
---   FOREIGN KEY (user_id) REFERENCES users(id)
     CONSTRAINT fk_user
         FOREIGN KEY (user_id)
         REFERENCES users(user_id)
