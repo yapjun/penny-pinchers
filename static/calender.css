@@ -109,6 +109,10 @@
     margin: 0px 10px;
     cursor: pointer;
   }
+
+  pre {
+    margin: 0px;
+  }
   
   .year-change:hover {
     background-color: #71a6df;
