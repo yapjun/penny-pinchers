@@ -13,14 +13,25 @@ def index():
     # conn.close()
     return render_template('profile.html')
 
-# def get_db_connection():
-#     conn = sqlite3.connect('database.db')
-#     conn.row_factory = sqlite3.Row
-#     return conn
+@app.route("/tracker")
+def tracker():
+    return render_template('tracker.html')
 
-if __name__ == "__main__":
-    app.run()
+@app.route('/pots')
+def pots():
+    return render_template('pots.html')
 
+@app.route('/monthly.html')
+def monthly():
+    return render_template('monthly.html')
+
+@app.route('/weekly.html')
+def weekly():
+    return render_template('weekly.html')
+
+@app.route('/settings.html')
+def settings():
+    return render_template('settings.html')
 
 @app.route("/add", methods=['POST'])
 def add_transaction():
@@ -84,6 +95,7 @@ def get_current_month_data():
     cursor = conn.cursor()
 
     # Fetch data for the current month
+
     current_month = datetime.now().month
     current_year = datetime.now().year
     query = "SELECT * FROM transactions WHERE strftime('%m', transaction_date) = ? AND strftime('%Y', transaction_date) = ?"
@@ -99,19 +111,22 @@ def get_current_month_data():
 def delete_transaction():
     try:
         data = request.get_json()
-        
         tid = data['transaction_id']
 
         conn = sqlite3.connect('database.db')
         cur = conn.cursor()
-        
+
         cur.execute('DELETE FROM transactions WHERE id = ?', (tid,))
 
         conn.commit()
-        
+
         conn.close()
-        
+
         return jsonify({'message': 'Transaction deleted!'}), 201
-    
+
     except Exception as e:
         return jsonify({'error': 'str(e)'}), 500
+
+
+if __name__ == "__main__":
+    app.run()
