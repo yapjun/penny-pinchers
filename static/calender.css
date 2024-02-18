@@ -13,12 +13,12 @@
     place-items: center;
     background: white;
     overflow: hidden;
-    zoom: 50%
   }
 
   .calendar-container {
     float: right;
     padding-top: 2.5%;
+    zoom: 50%;
   }
   
   .calendar {
