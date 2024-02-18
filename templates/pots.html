@@ -5,9 +5,9 @@
 {% extends "base.html" %}
 {% block title %}Pots page{% endblock %}
 {% block head %}
-{{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='pots.css') }}">
-<script src="{{ url_for('static', filename='pots.js') }}" defer></script>
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pots.css') }}">
+  <script src="{{ url_for('static', filename='pots.js') }}" defer></script>
 {% endblock %}
 
 
@@ -22,7 +22,7 @@
                 <p>Goal amount: <span id="savingsGoal">0</span></p>
                 <button onclick="deposit('savings')">Deposit</button>
                 <button onclick="withdraw('savings')">Withdraw</button>
-                <button onclick="remove('holidays')">Remove</button>
+                <button onclick="remove('savings')">Remove</button>
             </div>
 
 
@@ -42,7 +42,7 @@
                 <p>Goal amount: <span id="groceriesGoal">0</span></p>
                 <button onclick="deposit('groceries')">Deposit</button>
                 <button onclick="withdraw('groceries')">Withdraw</button>
-                <button onclick="remove('holidays')">Remove</button>
+                <button onclick="remove('groceries')">Remove</button>
             </div>
         </div>
 
@@ -63,5 +63,4 @@
 
 
 </body>
-
 </html>
