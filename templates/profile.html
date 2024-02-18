@@ -21,7 +21,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+
     <div class="transactions-container">
+      <h1 class="display-1" style="text-align:left; font-family:'Monaco'; font-weight:bold;">Penny Pinchers</h1>
+      <br>
+
       <div class="row justify-content-center">
           <div>
               <h2>Transactions</h2>
@@ -114,7 +118,7 @@
             </div>
           </div>
       </div>
-      <div class = "efficiency">
+      <div class = "efficiency" style="margin-top:10px;">
         <span>Efficiency:</span>
         <img src = "{{ url_for('static', filename='efficiency_bar.svg') }}">
       </div>
