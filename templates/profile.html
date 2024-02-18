@@ -23,16 +23,16 @@
         crossorigin="anonymous"></script>
     <div class="transactions-container">
       <div class="row justify-content-center">
-          <div class="col-7">
+          <div>
               <h2>Transactions</h2>
-              <table class ="transac_table" border="1">
+              <table class ="transac_table table table-hover" border="1">
                   <thead>
                       <tr>
-                          <th>Name</th>
+                          <th style="width:40%">Name</th>
                           <th>Cost</th>
-                          <th>Date</th>
+                          <th style="width:30%">Date</th>
                           <th>Category</th>
-                          <th>Need or Want?</th>
+                          <th style="width:40%">Need or Want?</th>
                           <th>Actions</th>
                       </tr>
                   </thead>
@@ -48,7 +48,7 @@
                                   {% else %}
                                   Want
                                   {% endif %}</td>
-                              <td>
+                              <td style="padding-right:10px;">
                                   <form action="/delete" method="post">
                                       <input type="hidden" name="transaction_id" value="{{ transaction[0] }}">
                                       <button type="submit" class="btn btn-danger">Delete</button>
@@ -97,7 +97,7 @@
                     <label for="transaction_name">Transaction Name:</label><br>
                     <input type="text" id="transaction_name" name="transaction_name" required><br>
                     <label for="amount">Cost:</label><br>
-                    <input type="number" id="amount" name="amount" required><br>
+                    <input type="number" step="0.01" id="amount" name="amount" required><br>
                     <label for="transaction_date">Date:</label><br>
                     <input type="date" id="transaction_date" name="transaction_date" required><br>
                     <label for="transaction_category">Category:</label><br>

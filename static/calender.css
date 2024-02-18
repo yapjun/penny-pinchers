@@ -18,7 +18,7 @@
   .transactions-container {
     float:left;
     margin-top: 5%;
-    margin-left: 5%;
+    margin-left: 6%;
     zoom: 100%;
     width:50%;
   }
@@ -35,7 +35,13 @@
   }
 
   tr {
-    height:45px;
+    height:30px ;
+    vertical-align:middle;
+  }
+
+  th {
+    margin-left:30px;
+    margin-right:30px;
   }
 
   .calendar-container {
