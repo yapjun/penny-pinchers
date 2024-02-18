@@ -31,7 +31,7 @@ def index():
     # users = conn.execute("SELECT * FROM user").fetchall()
     # conn.close()
     random_tip = random.choice(tips)
-    return render_template('transactions.html', tip=random_tip)
+    return render_template('profile.html', tip=random_tip)
 
 @app.route("/profile")
 def profile():
@@ -40,12 +40,21 @@ def profile():
 
 @app.route("/tracker")
 def tracker():
-    return render_template('tracker.html')
+    # Connect to the database
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    # Fetch data from the SQL table
+    cursor.execute("SELECT transaction_id, transaction_name, amount, transaction_date, transaction_category, necessity_index FROM transactions ORDER BY transaction_date DESC")
+    transactions = cursor.fetchall()
+
+    # Close the connection
+    conn.close()
+    return render_template('tracker.html', transactions=transactions)
 
 @app.route('/pots')
 def pots():
     return render_template('pots.html')
-
 
 @app.route('/monthly')
 def monthly():
@@ -62,37 +71,79 @@ def settings():
 @app.route("/add", methods=['POST'])
 def add_transaction():
     try:
-        data = request.get_json()
+        if request.method == 'POST':
+            transaction_name = request.form['transaction_name']
+            amount = request.form['amount']
+            transaction_date = request.form['transaction_date']
+            transaction_category = request.form['transaction_category']
+            necessity_index = request.form.get('necessity_index', False)  # Get boolean value from checkbox 
+
+            conn = sqlite3.connect('database.db')
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO transactions (transaction_name, amount, transaction_date, transaction_category, necessity_index) VALUES (?, ?, ?, ?, ?)",
+                        (transaction_name, amount, transaction_date, transaction_category, necessity_index))
+            conn.commit()
+            conn.close()
+
+        # data = request.get_json()
         
-        name = data['name']
-        amount = data['amount']
-        date = data['date'] # 'YYYY-MM-DD'
-        necessity_index = data['necessity']
-        category = data['category']
+        # name = data['name']
+        # amount = data['amount']
+        # date = data['date'] # 'YYYY-MM-DD'
+        # necessity_index = data['necessity']
+        # category = data['category']
         
-        conn = sqlite3.connect('database.db')
-        cur = conn.cursor()
+        # conn = sqlite3.connect('database.db')
+        # cur = conn.cursor()
         
-        sql = '''INSERT INTO transactions (name, amount, date, necessity_index, category) 
-                VALUES (?, ?, ?, ?, ?)'''
+        # sql = '''INSERT INTO transactions (name, amount, date, necessity_index, category) 
+        #         VALUES (?, ?, ?, ?, ?)'''
         
-        cur.execute(sql, (name, amount, date, necessity_index, category))
-        conn.commit()
+        # cur.execute(sql, (name, amount, date, necessity_index, category))
+        # conn.commit()
         
-        conn.close()
+        # conn.close()
         
-        return jsonify({'message': 'Transaction added!'}), 201
+        return redirect(url_for('tracker'))
     
     except Exception as e:
         return jsonify({'error': 'str(e)'}), 500
-    # data = request
 
-    # with conn:
-        
-    #     cur.execute("INSERT INTO transactions (name, VALUES ()")
-
-def edit_transation():
+def edit_transaction():
     return 0
+
+@app.route('/filter', methods=['GET'])
+def filter_transactions():
+
+    category = request.args.get('category')
+
+    if category:
+        # Connect to the database
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+
+        # Fetch transactions for the specified category
+        cursor.execute("SELECT transaction_id, transaction_name, amount, transaction_date, transaction_category, necessity_index FROM transactions WHERE LOWER(transaction_category) = LOWER(?)", (category,))
+        filtered_transactions = cursor.fetchall()
+
+        # Close the connection
+        conn.close()
+
+        return render_template('tracker.html', transactions=filtered_transactions)
+    else:
+       # Connect to the database
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+
+        # Fetch data from the SQL table
+        cursor.execute("SELECT transaction_id, transaction_name, amount, transaction_date, transaction_category, necessity_index FROM transactions ORDER BY transaction_date DESC")
+        data = cursor.fetchall()
+
+        # Close the connection
+        conn.close()
+        return render_template('tracker.html', data=data)
+
+
 
 @app.route("/post", methods=["GET"])
 def get_current_week_data():
@@ -133,27 +184,38 @@ def get_current_month_data():
 
     return current_month_data
 
-@app.route("/delete", methods=["DELETE"])
+# @app.route("/delete/<int:transaction_id>", methods=["DELETE"])
+# def delete_transaction():
+#     try:
+#         data = request.get_json()
+#         tid = data['transaction_id']
+
+#         conn = sqlite3.connect('database.db')
+#         cur = conn.cursor()
+
+#         cur.execute('DELETE FROM transactions WHERE id = ?', (tid))
+
+#         conn.commit()
+
+#         conn.close()
+
+#         return jsonify({'message': 'Transaction deleted!'}), 201
+
+#     except Exception as e:
+#         return jsonify({'error': 'str(e)'}), 500
+
+@app.route('/delete', methods=['POST'])
 def delete_transaction():
-    try:
-        data = request.get_json()
-        tid = data['transaction_id']
-
+    if request.method == 'POST':
+        transaction_id = request.form['transaction_id']
         conn = sqlite3.connect('database.db')
-        cur = conn.cursor()
-
-        cur.execute('DELETE FROM transactions WHERE id = ?', (tid))
-
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM transactions WHERE transaction_id = ?", (transaction_id,))
         conn.commit()
-
         conn.close()
-
-        return jsonify({'message': 'Transaction deleted!'}), 201
-
-    except Exception as e:
-        return jsonify({'error': 'str(e)'}), 500
-
-
+        
+        return redirect(url_for('tracker'))
+    
 if __name__ == "__main__":
     app.run(debug=True)
 
