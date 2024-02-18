@@ -184,26 +184,6 @@ def get_current_month_data():
 
     return current_month_data
 
-# @app.route("/delete/<int:transaction_id>", methods=["DELETE"])
-# def delete_transaction():
-#     try:
-#         data = request.get_json()
-#         tid = data['transaction_id']
-
-#         conn = sqlite3.connect('database.db')
-#         cur = conn.cursor()
-
-#         cur.execute('DELETE FROM transactions WHERE id = ?', (tid))
-
-#         conn.commit()
-
-#         conn.close()
-
-#         return jsonify({'message': 'Transaction deleted!'}), 201
-
-#     except Exception as e:
-#         return jsonify({'error': 'str(e)'}), 500
-
 @app.route('/delete', methods=['POST'])
 def delete_transaction():
     if request.method == 'POST':
