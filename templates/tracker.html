@@ -46,7 +46,7 @@
                         <th>Amount</th>
                         <th>Date</th>
                         <th>Category</th>
-                        <th>Necessity Index</th>
+                        <th>Need or Want?</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -57,7 +57,11 @@
                             <td>{{ transaction[2] }}</td>
                             <td>{{ transaction[3] }}</td>
                             <td>{{ transaction[4] }}</td>
-                            <td>{{ transaction[5] }}</td>
+                            <td>{% if transaction[5] == 1 %}
+                                Need
+                                {% else %}
+                                Want
+                                {% endif %}</td>
                             <td>
                                 <form action="/delete" method="post">
                                     <input type="hidden" name="transaction_id" value="{{ transaction[0] }}">
