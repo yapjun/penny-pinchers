@@ -18,8 +18,24 @@
   .transactions-container {
     float:left;
     margin-top: 5%;
-    margin-left: 15%;
-    zoom: 150%;
+    margin-left: 5%;
+    zoom: 100%;
+    width:50%;
+  }
+
+  .transac_table {
+    margin: 0px auto;
+    width:100%;
+    align: center;
+  }
+
+  td{
+    padding-left:10px;
+    margin-right:100px;
+  }
+
+  tr {
+    height:45px;
   }
 
   .calendar-container {
@@ -353,3 +369,9 @@
     -webkit-transform: translate(-50%, -50%); /* iOS */
     transform: translate(-50%, -50%);
   }
+
+  .td_left {
+    text-align:left;
+    padding-left:4px;
+  }
+

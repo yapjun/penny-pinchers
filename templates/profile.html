@@ -29,7 +29,7 @@
                   <thead>
                       <tr>
                           <th>Name</th>
-                          <th>Amount</th>
+                          <th>Cost</th>
                           <th>Date</th>
                           <th>Category</th>
                           <th>Need or Want?</th>
@@ -39,8 +39,8 @@
                       <tbody>
                           {% for transaction in transactions %}
                           <tr>
-                              <td>{{ transaction[1] }}</td>
-                              <td>{{ transaction[2] }}</td>
+                              <td class="td_left">{{ transaction[1] }}</td>
+                              <td>£{{ transaction[2] }}</td>
                               <td>{{ transaction[3] }}</td>
                               <td>{{ transaction[4] }}</td>
                               <td>{% if transaction[5] == 1 %}
@@ -51,14 +51,14 @@
                               <td>
                                   <form action="/delete" method="post">
                                       <input type="hidden" name="transaction_id" value="{{ transaction[0] }}">
-                                      <button type="submit">Delete</button>
+                                      <button type="submit" class="btn btn-danger">Delete</button>
                                   </form>
                               </td>
                           </tr>
                           {% endfor %}
                       </tbody>
                   </table>
-                  <hr>
+                  <br>
                   <h3>Transactions Filter</h3>
                   
                   <form action="/filter" method="get">
@@ -66,26 +66,52 @@
                       <input type="text" id="category" name="category" placeholder="Type category here...">
                       <button type="submit">Filter</button><br>
                       <br><a href="/profile" class="btn btn-light">Show All Transactions</a>
+                      <br>
+                      <br>
                   </form>
+
+                  <button type="button" style="width:150px" class="btn btn-success add_t_button" data-toggle="modal" data-target="#exampleModal">
+                    Add transactions
+                  </button>
           </div>
 
-          <div class="col-5">
-              <h3>Add Transaction</h3>
-              <form action="/add" method="post">
+
+          <!-- Button trigger modal -->
+
+
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Add Transaction</h5>
+                  <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    Close
+                  </button>
+                </div>
+                <form action="/add" method="post">
+                <div class="modal-body">
                   
-                  <label for="transaction_name">Transaction Name:</label><br>
-                  <input type="text" id="transaction_name" name="transaction_name" required><br>
-                  <label for="amount">Amount:</label><br>
-                  <input type="number" id="amount" name="amount" required><br>
-                  <label for="transaction_date">Date:</label><br>
-                  <input type="date" id="transaction_date" name="transaction_date" required><br>
-                  <label for="transaction_category">Category:</label><br>
-                  <input type="text" id="transaction_category" name="transaction_category" required><br>
-                  <label for="necessity_index">Necessity Index:</label>
-                  <input type="checkbox" id="necessity_index" name="necessity_index"><br>
-                  <button type="submit">Add Transaction</button>
-                  
+                    <label for="transaction_name">Transaction Name:</label><br>
+                    <input type="text" id="transaction_name" name="transaction_name" required><br>
+                    <label for="amount">Cost:</label><br>
+                    <input type="number" id="amount" name="amount" required><br>
+                    <label for="transaction_date">Date:</label><br>
+                    <input type="date" id="transaction_date" name="transaction_date" required><br>
+                    <label for="transaction_category">Category:</label><br>
+                    <input type="text" id="transaction_category" name="transaction_category" required><br>
+                    <label for="necessity_index">Necessity Index:</label>
+                    <input type="checkbox" id="necessity_index" name="necessity_index"><br>
+                
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Add Transaction</button>
+                </div>
               </form>
+              </div>
+            </div>
           </div>
       </div>
     </div>
