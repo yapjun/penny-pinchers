@@ -31,7 +31,7 @@ def index():
     # users = conn.execute("SELECT * FROM user").fetchall()
     # conn.close()
     random_tip = random.choice(tips)
-    return render_template('profile.html', tip=random_tip)
+    return render_template('transactions.html', tip=random_tip)
 
 @app.route("/profile")
 def profile():
