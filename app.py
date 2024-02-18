@@ -35,11 +35,6 @@ def index():
 
 @app.route("/profile")
 def profile():
-    random_tip = random.choice(tips)
-    return render_template('profile.html', tip=random_tip)
-
-@app.route("/tracker")
-def tracker(): 
     # Connect to the database
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
@@ -47,10 +42,27 @@ def tracker():
     # Fetch data from the SQL table
     cursor.execute("SELECT transaction_id, transaction_name, amount, transaction_date, transaction_category, necessity_index FROM transactions ORDER BY transaction_date DESC")
     transactions = cursor.fetchall()
+    print(transactions)
 
     # Close the connection
     conn.close()
-    return render_template('tracker.html', transactions=transactions)
+    random_tip = random.choice(tips)
+    return render_template('profile.html', tip=random_tip, transactions=transactions)
+
+# @app.route("/profile")
+# def tracker(): 
+#     # Connect to the database
+#     conn = sqlite3.connect('database.db')
+#     cursor = conn.cursor()
+
+#     # Fetch data from the SQL table
+#     cursor.execute("SELECT transaction_id, transaction_name, amount, transaction_date, transaction_category, necessity_index FROM transactions ORDER BY transaction_date DESC")
+#     transactions = cursor.fetchall()
+#     print(transactions)
+
+#     # Close the connection
+#     conn.close()
+#     return render_template('profile.html', transactions=transactions)
 
 @app.route('/pots')
 def pots():
@@ -129,7 +141,7 @@ def filter_transactions():
         # Close the connection
         conn.close()
 
-        return render_template('tracker.html', transactions=filtered_transactions)
+        return render_template('profile.html', transactions=filtered_transactions)
     else:
        # Connect to the database
         conn = sqlite3.connect('database.db')
@@ -141,7 +153,7 @@ def filter_transactions():
 
         # Close the connection
         conn.close()
-        return render_template('tracker.html', data=data)
+        return render_template('profile.html', data=data)
 
 
 
