@@ -33,6 +33,10 @@ def index():
     random_tip = random.choice(tips)
     return render_template('profile.html', tip=random_tip)
 
+@app.route("/profile")
+def profile():
+    random_tip = random.choice(tips)
+    return render_template('profile.html', tip=random_tip)
 
 @app.route("/tracker")
 def tracker():
@@ -151,4 +155,5 @@ def delete_transaction():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
+
