@@ -46,8 +46,9 @@
       </div>
       <div class="month-list"></div>
     </div>
-
-    <div class="tip-box">
-      <p>{{ tip }}</p>
+  </div>  
+  <p class="tip-text">{{ tip }}</p>
+  <div class="tip-box">
+      <img class = "dragon" src = "{{ url_for('static', filename='pennypincher.svg') }}" alt="My Happy SVG"/>
   </div>
 {% endblock %}

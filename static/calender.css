@@ -311,3 +311,25 @@
       opacity: 1;
     }
   }
+
+  .tip-box{
+    background-image: url(static/pennypinchers.svg);
+    padding-left: 10%;
+    width: 35vw;
+    padding-top: 3%;
+    height: 35vh;
+  }
+
+  .dragon{
+    width: 90%;
+    height: 90%;
+  }
+
+  .tip-text{
+    padding-top: 5%;
+    padding-left: 10%;
+    width: 40%;
+    min-height: 8vh;
+    max-height: 8vh;
+    display: inline-block;
+  }
