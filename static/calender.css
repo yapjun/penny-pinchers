@@ -15,6 +15,13 @@
     overflow: hidden;
   }
 
+  .transactions-container {
+    float:left;
+    margin-top: 5%;
+    margin-left: 15%;
+    zoom: 150%;
+  }
+
   .calendar-container {
     float: right;
     padding-top: 2.5%; 
