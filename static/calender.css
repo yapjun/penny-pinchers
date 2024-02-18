@@ -13,6 +13,7 @@
     place-items: center;
     background: white;
     overflow: hidden;
+    zoom: 50%
   }
 
   .calendar-container {
