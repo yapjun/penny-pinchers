@@ -39,8 +39,7 @@ def tracker():
 @app.route('/pots')
 def pots():
     return render_template('pots.html')
-    random_tip = random.choice(tips)
-    return render_template('profile.html', tip=random_tip)
+
 
 @app.route('/monthly')
 def monthly():
@@ -137,7 +136,7 @@ def delete_transaction():
         conn = sqlite3.connect('database.db')
         cur = conn.cursor()
 
-        cur.execute('DELETE FROM transactions WHERE id = ?', (tid,))
+        cur.execute('DELETE FROM transactions WHERE id = ?', (tid))
 
         conn.commit()
 
@@ -151,3 +150,5 @@ def delete_transaction():
 
 if __name__ == "__main__":
     app.run()
+    random_tip = random.choice(tips)
+    return render_template('profile.html', tip=random_tip)
