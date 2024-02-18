@@ -17,9 +17,7 @@
 
   .calendar-container {
     float: right;
-    padding-top: 2.5%;
-    max-height: 100vh;
-    max-width: 100vw;
+    padding-top: 2.5%; 
   }
   
   .calendar {
@@ -330,7 +328,7 @@
   .tip-text{
     margin-top: 20%;
     padding-left: 10%;
-    width: 100%;
+    width: 80%;
     min-height: 5vh;
     max-height: 5vh;
     display: inline-block;
